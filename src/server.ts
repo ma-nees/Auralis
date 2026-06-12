@@ -1,8 +1,8 @@
 import "./lib/error-capture";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
-import yts from "yt-search";
-
+// import yts from "yt-search";
+// const { default: yts } = await import("yt-search");
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
@@ -490,6 +490,7 @@ function buildMusicSearchQuery(query: string): string {
 
 async function searchYouTubeTracks(query: string): Promise<any[]> {
   try {
+    const { default: yts } = await import("yt-search");
     const searchQuery = buildMusicSearchQuery(query);
     const r = await yts(searchQuery);
 
